@@ -1,0 +1,15 @@
+body{
+    text-align: center;
+    background-color: black;
+}
+
+h2{
+    color: aqua;
+}
+
+input{
+    font-size:x-large;
+    background-color: aqua;
+    color: black;
+    font-weight: bolder;
+}
