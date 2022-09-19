@@ -4,18 +4,17 @@ const cookieParser = require("cookie-parser");
 const sessions = require("express-session");
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.port || 8080;
 const hostname = "localhost:8080";
 
-// creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
 
-//session middleware
+const oneHour = 3600000;
+
 app.use(
   sessions({
     secret: "something_secret",
     saveUninitialized: true,
-    cookie: { maxAge: oneDay },
+    cookie: { maxAge: oneHour },
     resave: false,
   })
 );
@@ -24,18 +23,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 app.use(cookieParser());
 
-//username and password
-const myusername = "gokstad";
-const mypassword = "skolen";
+const myusername = "Ben";
+const mypassword = "Home";
 
 let session = [];
 
-// app.get("/", (req, res) => {
-//   session = req.session;
-//   if (session.userid) {
-//     res.send("Welcome User <a href='/logout'>click to logout</a>");
-//   } else res.sendFile("index.html", { root: __dirname });
-// });
+ app.get("/", (req, res) => {
+   session = req.session;
+   if (session.userid) {
+     res.send("Welcome User <a href='/logout'>click to logout</a>");
+   } else res.sendFile("index.html", { root: __dirname });
+ });
 
 app.post("/user", (req, res) => {
   if (req.body.username == myusername && req.body.password == mypassword) {
@@ -66,28 +64,9 @@ app.get("/userpage", function (req, res) {
 });
 
 app.post("/userpage", function (req, res) {
-  //   console.log(`Hei ${req.cookies.username}`);
-  //   myusername.replace("dog", "monkey");
-  //   console.log(`Hei ${req.cookies.username}`);
-  //   res.redirect("/userpage");
-  //   req.body.mypassword(req.body.password, (err, user) => {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       user.mypassword(
-  //         req.body.oldpassword,
-  //         req.body.newpassword,
-  //         function (err) {
-  //           if (err) {
-  //             res.send(err);
-  //           } else {
-  //             res.send("successfully change password");
-  //           }
-  //         }
-  //       );
-  //     }
-  //   });
-  //   if (req.body.oldpassword == myusername) {
+ 
+
+
   req.body.oldpassword.replace(req.body.newpassword);
   res.cookie("password", req.body.password);
   session = req.session;

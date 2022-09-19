@@ -8,8 +8,13 @@ h2{
 }
 
 input{
-    font-size:x-large;
+    font-size:large;
     background-color: aqua;
     color: black;
     font-weight: bolder;
+}
+
+button{
+    background-color: blueviolet;
+    padding:10px
 }
